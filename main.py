@@ -5,9 +5,9 @@ import json
 import os
 
 def mostrar_menu_principal() -> str:
-    print("\n" + "="*40)
-    print(" SISTEMA DE GESTIÓN DE CINE ".center(40))
-    print("="*40)
+   
+    print("Peliculas ".center(40))
+   
     print("1. Iniciar sesión")
     print("2. Registrarse")
     print("3. Salir")
@@ -76,9 +76,9 @@ def main():
                                 print(f"Sinopsis: {pelicula['sinopsis']}")
                                 print("="*40)
                             else:
-                                print("\nℹ️ Película no encontrada.")
+                                print("\nPelícula no encontrada.")
                         except ValueError:
-                            print("\n❌ Error: El ID debe ser un número.")
+                            print("\n Error: El ID debe ser un número.")
                         pausa()
                         
                     elif opcion_usuario == '3':
@@ -99,11 +99,11 @@ def main():
                             datos['año'] = int(datos['año'])
                             datos['duracion'] = int(datos['duracion'])
                             if gestor_peliculas.crear(datos):
-                                print("\n✅ Película agregada exitosamente!")
+                                print("\n Película agregada exitosamente!")
                             else:
-                                print("\n⚠️ No se pudo agregar la película")
+                                print("\nNo se pudo agregar la película")
                         except ValueError:
-                            print("\n❌ Error: El año y la duración deben ser números.")
+                            print("\n Error: El año y la duración deben ser números.")
                         pausa()
                         
                     elif opcion_usuario == '4':
@@ -132,15 +132,15 @@ def main():
                                     datos['año'] = int(datos['año'])
                                     datos['duracion'] = int(datos['duracion'])
                                     if gestor_peliculas.actualizar(id_pelicula, datos):
-                                        print("\n✅ Película actualizada correctamente!")
+                                        print("\n Película actualizada correctamente!")
                                     else:
-                                        print("\n⚠️ No se actualizó ninguna película")
+                                        print("\nNo se actualizó ninguna película")
                                 except ValueError:
-                                    print("\n❌ Error: El año y la duración deben ser números.")
+                                    print("\n Error: El año y la duración deben ser números.")
                             else:
-                                print("\nℹ️ Película no encontrada.")
+                                print("\n Película no encontrada.")
                         except ValueError:
-                            print("\n❌ Error: El ID debe ser un número.")
+                            print("\n Error: El ID debe ser un número.")
                         pausa()
                         
                     elif opcion_usuario == '5':
@@ -151,11 +151,11 @@ def main():
                             
                             if confirmacion == 's':
                                 if gestor_peliculas.eliminar(id_pelicula):
-                                    print("\n✅ Película eliminada correctamente!")
+                                    print("\n Película eliminada correctamente!")
                                 else:
-                                    print("\n⚠️ No se eliminó ninguna película")
+                                    print("\n No se eliminó ninguna película")
                         except ValueError:
-                            print("\n❌ Error: El ID debe ser un número.")
+                            print("\n Error: El ID debe ser un número.")
                         pausa()
                         
                     elif opcion_usuario == '6':
@@ -166,20 +166,20 @@ def main():
                         if confirmacion == 's':
                             if os.path.exists(archivo):
                                 if ConexionBD.llenar_desde_json(archivo):
-                                    print("\n✅ Base de datos llenada exitosamente!")
+                                    print("\n Base de datos llenada exitosamente!")
                                 else:
-                                    print("\n⚠️ Hubo problemas al llenar la base de datos")
+                                    print("\n Hubo problemas al llenar la base de datos")
                             else:
-                                print(f"\n❌ Error: El archivo {archivo} no existe.")
+                                print(f"\n Error: El archivo {archivo} no existe.")
                         pausa()
                         
                     elif opcion_usuario == '7':
                         limpiar_pantalla()
                         archivo = input("\nNombre del archivo de salida (dejar vacío para 'respaldo_peliculas.json'): ").strip() or 'respaldo_peliculas.json'
                         if ConexionBD.generar_respaldo(archivo):
-                            print("\n✅ Respaldo generado exitosamente!")
+                            print("\nRespaldo generado exitosamente!")
                         else:
-                            print("\n⚠️ Hubo problemas al generar el respaldo")
+                            print("\nHubo problemas al generar el respaldo")
                         pausa()
                         
                     elif opcion_usuario == '8':
@@ -187,15 +187,15 @@ def main():
                         break
                         
                     else:
-                        print("\n❌ Opción no válida.")
+                        print("\n Opción no válida.")
                         pausa()
                         
         elif opcion == '2':
             limpiar_pantalla()
             if sistema_login.registrar():
-                print("\n✅ ¡Usuario registrado con éxito!")
+                print("\n ¡Usuario registrado con éxito!")
             else:
-                print("\n⚠️ No se completó el registro")
+                print("\n No se completó el registro")
             pausa()
             
         elif opcion == '3':
@@ -204,7 +204,7 @@ def main():
             break
             
         else:
-            print("\n❌ Opción no válida.")
+            print("\n Opción no válida.")
             pausa()
 
 if __name__ == "__main__":

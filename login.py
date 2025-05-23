@@ -24,7 +24,7 @@ class Login:
                 }
             return None
         except Exception as e:
-            print(f"❌ Error al validar credenciales: {e}")
+            print(f" Error al validar credenciales: {e}")
             return None
 
     def iniciar_sesion(self) -> Optional[int]:
@@ -37,26 +37,26 @@ class Login:
             password = getpass.getpass("Contraseña: ").strip()
             
             if not email or not password:
-                print("\n❌ Email y contraseña son obligatorios.")
+                print("\n Email y contraseña son obligatorios.")
                 return None
             
             usuario = self.__validar_credenciales(email, password)
             
             if usuario:
-                print(f"\n✅ ¡Bienvenido, {usuario['nombre']}!")
+                print(f"\n ¡Bienvenido, {usuario['nombre']}!")
                 self.__usuario_actual = usuario
                 return usuario['id']
             else:
-                print("\n❌ Email o contraseña incorrectos.")
+                print("\n Email o contraseña incorrectos.")
                 return None
         except Exception as e:
-            print(f"\n❌ Error durante el inicio de sesión: {e}")
+            print(f"\n Error durante el inicio de sesión: {e}")
             return None
 
     def registrar(self) -> Optional[int]:
-        print("\n" + "="*40)
+        
         print(" REGISTRO DE NUEVO USUARIO ".center(40))
-        print("="*40)
+        
         
         try:
             nombre = input("Nombre: ").strip()
@@ -65,15 +65,15 @@ class Login:
             confirm_password = getpass.getpass("Confirmar contraseña: ").strip()
             
             if not all([nombre, email, password, confirm_password]):
-                print("\n❌ Todos los campos son obligatorios.")
+                print("\n Todos los campos son obligatorios.")
                 return None
                 
             if password != confirm_password:
-                print("\n❌ Las contraseñas no coinciden.")
+                print("\n Las contraseñas no coinciden.")
                 return None
                 
             if len(password) < 5:
-                print("\n❌ La contraseña debe tener al menos 5 caracteres.")
+                print("\n La contraseña debe tener al menos 5 caracteres.")
                 return None
             
             consulta_verificar = f"""
@@ -87,7 +87,7 @@ class Login:
             )
             
             if existe:
-                print("\n❌ Este email ya está registrado.")
+                print("\n Este email ya está registrado.")
                 return None
             
             hashed_password = ConexionBD.encriptar_password(password)
@@ -109,14 +109,14 @@ class Login:
                 # Obtener el ID del usuario recién insertado
                 consulta_id = "SELECT LAST_INSERT_ID() as id"
                 usuario_id = ConexionBD.ejecutar_consulta(consulta_id, fetch='one')['id']
-                print("\n✅ ¡Registro exitoso! Ahora puedes iniciar sesión.")
+                print("\n ¡Registro exitoso! Ahora puedes iniciar sesión.")
                 return usuario_id
             else:
-                print("\n⚠️ El registro no se completó (pero no hubo error en la consulta)")
+                print("\nEl registro no se completó (pero no hubo error en la consulta)")
                 return None
                 
         except Exception as e:
-            print(f"\n❌ Error real durante el registro: {e}")
+            print(f"\n Error real durante el registro: {e}")
             return None
 
     def get_usuario_actual(self) -> Optional[Dict]:
@@ -124,5 +124,5 @@ class Login:
 
     def cerrar_sesion(self) -> None:
         if self.__usuario_actual:
-            print(f"\nℹ️ Sesión cerrada. Hasta luego, {self.__usuario_actual['nombre']}!")
+            print(f"\n Sesión cerrada. Hasta luego, {self.__usuario_actual['nombre']}!")
         self.__usuario_actual = None

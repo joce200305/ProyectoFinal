@@ -30,12 +30,12 @@ class Peliculas:
         try:
             resultado = ConexionBD.ejecutar_consulta(consulta, datos)
             if resultado:
-                print("✅ Película agregada exitosamente!")
+                print(" Película agregada exitosamente!")
                 return True
-            print("⚠️ No se pudo agregar la película")
+            print("No se pudo agregar la película")
             return False
         except Exception as e:
-            print(f"❌ Error al crear película: {e}")
+            print(f" Error al crear película: {e}")
             return False
 
     def leer(self, id_pelicula: Optional[int] = None) -> Optional[Union[Dict, List[Dict]]]:
@@ -47,12 +47,12 @@ class Peliculas:
                 consulta = f"SELECT * FROM {self.__tabla} ORDER BY titulo"
                 return ConexionBD.ejecutar_consulta(consulta, fetch=True)
         except Exception as e:
-            print(f"❌ Error al leer películas: {e}")
+            print(f" Error al leer películas: {e}")
             return None
 
     def actualizar(self, id_pelicula: int, datos: Dict) -> bool:
         if not self.__validar_datos(datos):
-            print("❌ Datos incompletos o inválidos.")
+            print(" Datos incompletos o inválidos.")
             return False
         
         datos['id'] = id_pelicula
@@ -67,12 +67,12 @@ class Peliculas:
         try:
             resultado = ConexionBD.ejecutar_consulta(consulta, datos)
             if resultado:
-                print("✅ Película actualizada correctamente!")
+                print(" Película actualizada correctamente!")
                 return True
-            print("⚠️ No se actualizó ninguna película (ID no existe o datos iguales)")
+            print(" No se actualizó ninguna película (ID no existe o datos iguales)")
             return False
         except Exception as e:
-            print(f"❌ Error al actualizar: {e}")
+            print(f" Error al actualizar: {e}")
             return False
 
     def eliminar(self, id_pelicula: int) -> bool:
@@ -80,12 +80,12 @@ class Peliculas:
         try:
             resultado = ConexionBD.ejecutar_consulta(consulta, (id_pelicula,))
             if resultado:
-                print("✅ Película eliminada correctamente!")
+                print(" Película eliminada correctamente!")
                 return True
-            print("⚠️ No se eliminó ninguna película (ID no existe)")
+            print(" No se eliminó ninguna película (ID no existe)")
             return False
         except Exception as e:
-            print(f"❌ Error al eliminar: {e}")
+            print(f" Error al eliminar: {e}")
             return False
 
     def mostrar_todas(self) -> bool:
@@ -102,8 +102,8 @@ class Peliculas:
                 print("="*120)
                 return True
             else:
-                print("ℹ️ No hay películas registradas.")
+                print(" No hay películas registradas.")
                 return False
         except Exception as e:
-            print(f"❌ Error al mostrar películas: {e}")
+            print(f" Error al mostrar películas: {e}")
             return False
